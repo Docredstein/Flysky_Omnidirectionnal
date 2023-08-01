@@ -1,4 +1,4 @@
-IBus.c:10:10:IBUS_Checksum	2
-IBus.c:18:19:IBUS_Init	1
-IBus.c:26:19:IBUS_Update	6
-IBus.c:50:11:IBUS_GetChannels	1
+../Custom/IBus.c:10:10:IBUS_Checksum	2
+../Custom/IBus.c:18:19:IBUS_Init	1
+../Custom/IBus.c:26:19:IBUS_Update	6
+../Custom/IBus.c:49:11:IBUS_GetChannels	1

@@ -14,7 +14,8 @@ HAL_StatusTypeDef Sabertooth_Init(Sabertooth *saber, UART_HandleTypeDef *handle,
 		saber->motor[i] = motor[i];
 	}
 	saber->handle = handle;
-
+	/*saber->Queue.FirstPacket = 0;
+	saber->Queue.NumberOfPacket = 0;*/
 	return HAL_OK;
 }
 HAL_StatusTypeDef Sabertooth_Send(Sabertooth *saber, uint8_t address,
@@ -31,9 +32,25 @@ HAL_StatusTypeDef Sabertooth_Send(Sabertooth *saber, uint8_t address,
 	}
 	Checksum = Checksum & 0x7F;
 	Packet[2 + data_length] = Checksum;
-	return HAL_UART_Transmit_DMA(saber->handle, Packet, 3 + data_length);
+	//return HAL_UART_Transmit_DMA(saber->handle, Packet, 3 + data_length);
+	return HAL_UART_Transmit(saber->handle, Packet, 3+data_length,10);
+	/*static Packet_el PacketToSend;
+	PacketToSend.Next_Packet = 0;
+	PacketToSend.Packet = Packet;
+	PacketToSend.length = 3 + data_length;
+	if (saber->Queue.NumberOfPacket > 0) {
 
+		saber->Queue.lastPacket->Next_Packet = &PacketToSend;
+		saber->Queue.lastPacket = &PacketToSend;
+		saber->Queue.NumberOfPacket += 1;
+	} else if (saber->handle->Lock){
+		saber->Queue.FirstPacket = &PacketToSend;
+		saber->Queue.lastPacket = &PacketToSend;
+		saber->Queue.NumberOfPacket = 1;
+	}*/
+	return HAL_OK;
 }
+
 HAL_StatusTypeDef Sabertooth_Drive(Sabertooth *saber, float command[4]) {
 	for (int i = 0; i < 4; i++) {
 		if (command[i] >= 0) {
@@ -43,10 +60,11 @@ HAL_StatusTypeDef Sabertooth_Drive(Sabertooth *saber, float command[4]) {
 
 		} else {
 			uint8_t data = floor(-command[i] * 127);
-			Sabertooth_Send(saber, saber->adress[i], 4 * saber->motor[i]+1, &data,
-					1);
+			Sabertooth_Send(saber, saber->adress[i], 4 * saber->motor[i] + 1,
+					&data, 1);
 		}
 	}
 
 	return HAL_OK;
 }
+

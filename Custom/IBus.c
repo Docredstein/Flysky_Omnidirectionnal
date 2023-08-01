@@ -38,10 +38,9 @@ HAL_StatusTypeDef IBUS_Update(IBus_struct *Ibus) {
 	}
 	memcpy(Packet, Ibus->UARTBuffer + packetStart + 2, 32);
 
-	uint16_t ChecksumReceived = (((uint16_t) Packet[29]) << 8)
-			+ (uint16_t) Packet[28];
 
-	for (uint16_t i = 0; i < 6; i++) {
+
+	for (uint16_t i = 0; i < 10	; i++) {
 		Ibus->channel[i] = (Packet[2 * i + 1] << 8) | Packet[2 * i];
 
 	}

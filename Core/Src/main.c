@@ -24,6 +24,7 @@
 #include "stdio.h"
 #include "IBus.h"
 #include "Sabertooth.h"
+#include "Omnidirection.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -53,7 +54,7 @@ IBus_struct Ibus;
 Sabertooth saber;
 uint8_t motor[4] = {0,0,1,1};
 uint8_t address[4] = {128,129,128,129};
-
+float Stop[4]={0};
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -69,10 +70,7 @@ static void MX_USART3_UART_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
-	// HAL_UART_Transmit(&huart2, "Received DMA" , strlen("Received DMA"), 100);
 
-}
 
 
 /* USER CODE END 0 */
@@ -120,7 +118,7 @@ int main(void)
 
 
   /* USER CODE END 2 */
-
+  float command[4]= {1,-1,-1,-1};
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -131,12 +129,34 @@ int main(void)
 
 	//Receiving
 	  IBUS_Update(&Ibus);
+
 	//Processing
+	  //Transform_Omni(channel, command);
+	  float tourner[4] = {1,0,-1,0};
+	  float avancer[4] = {1,0,1,0};
+	  for (int i=0;i<4;i++) {
+		  command[i] = channel[1] * avancer[i] + channel[0]*tourner[i];
+..0.222222222222222222222222222222222222222222222222222222222.
+	  }
+
 
 	//Controlling
-	  sprintf(msg,"?%i;%i;%i;%i\r\n",channel[0],channel[1],channel[2],channel[3]);
+	  if (channel[8]<1500) {
+		  Sabertooth_Drive(&saber,Stop);
+		  HAL_UART_Transmit(&huart2, "-", 1, 5);
+	  }
+	  else {
+		  Sabertooth_Drive(&saber,command);
+	  }
+
+
+
+	  //sprintf(msg,"%i,%f;\r\n",channel[0],command[0]);
+	  sprintf(msg,"%i;%i;%i;%i;%i;%i;%i;%i;%i;%i\r\n",channel[0],channel[1],channel[2],channel[3],channel[4],channel[5],channel[6],channel[7],channel[8],channel[9]);
 	  HAL_UART_Transmit(&huart2, msg, strlen(msg), 100);
-	  HAL_Delay(20);
+
+
+
 
   }
   /* USER CODE END 3 */
