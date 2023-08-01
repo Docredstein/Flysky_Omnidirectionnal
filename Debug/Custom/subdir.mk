@@ -6,14 +6,17 @@
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../Custom/IBus.c \
+../Custom/Omnidirection.c \
 ../Custom/Sabertooth.c 
 
 OBJS += \
 ./Custom/IBus.o \
+./Custom/Omnidirection.o \
 ./Custom/Sabertooth.o 
 
 C_DEPS += \
 ./Custom/IBus.d \
+./Custom/Omnidirection.d \
 ./Custom/Sabertooth.d 
 
 
@@ -24,7 +27,7 @@ Custom/%.o Custom/%.su Custom/%.cyclo: ../Custom/%.c Custom/subdir.mk
 clean: clean-Custom
 
 clean-Custom:
-	-$(RM) ./Custom/IBus.cyclo ./Custom/IBus.d ./Custom/IBus.o ./Custom/IBus.su ./Custom/Sabertooth.cyclo ./Custom/Sabertooth.d ./Custom/Sabertooth.o ./Custom/Sabertooth.su
+	-$(RM) ./Custom/IBus.cyclo ./Custom/IBus.d ./Custom/IBus.o ./Custom/IBus.su ./Custom/Omnidirection.cyclo ./Custom/Omnidirection.d ./Custom/Omnidirection.o ./Custom/Omnidirection.su ./Custom/Sabertooth.cyclo ./Custom/Sabertooth.d ./Custom/Sabertooth.o ./Custom/Sabertooth.su
 
 .PHONY: clean-Custom
 

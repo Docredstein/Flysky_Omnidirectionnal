@@ -1,0 +1,3 @@
+../Custom/Sabertooth.c:10:19:Sabertooth_Init	32	static
+../Custom/Sabertooth.c:20:19:Sabertooth_Send	72	dynamic
+../Custom/Sabertooth.c:37:19:Sabertooth_Drive	32	static
