@@ -21,6 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+
 #include "stdio.h"
 #include "IBus.h"
 #include "Sabertooth.h"
@@ -118,7 +119,7 @@ int main(void)
 
 
   /* USER CODE END 2 */
-  float command[4]= {1,-1,-1,-1};
+  float command[4]= {0};
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -131,19 +132,14 @@ int main(void)
 	  IBUS_Update(&Ibus);
 
 	//Processing
-	  //Transform_Omni(channel, command);
-	  float tourner[4] = {1,0,-1,0};
-	  float avancer[4] = {1,0,1,0};
-	  for (int i=0;i<4;i++) {
-		  command[i] = channel[1] * avancer[i] + channel[0]*tourner[i];
-..0.222222222222222222222222222222222222222222222222222222222.
-	  }
+	  Transform_Omni(channel, command);
+
 
 
 	//Controlling
 	  if (channel[8]<1500) {
 		  Sabertooth_Drive(&saber,Stop);
-		  HAL_UART_Transmit(&huart2, "-", 1, 5);
+		  //HAL_UART_Transmit(&huart2, "-", 1, 5);
 	  }
 	  else {
 		  Sabertooth_Drive(&saber,command);
@@ -152,8 +148,8 @@ int main(void)
 
 
 	  //sprintf(msg,"%i,%f;\r\n",channel[0],command[0]);
-	  sprintf(msg,"%i;%i;%i;%i;%i;%i;%i;%i;%i;%i\r\n",channel[0],channel[1],channel[2],channel[3],channel[4],channel[5],channel[6],channel[7],channel[8],channel[9]);
-	  HAL_UART_Transmit(&huart2, msg, strlen(msg), 100);
+	  //sprintf(msg,"%i;%i;%i;%i;%i;%i;%i;%i;%i;%i\r\n",channel[0],channel[1],channel[2],channel[3],channel[4],channel[5],channel[6],channel[7],channel[8],channel[9]);
+	  //HAL_UART_Transmit(&huart2, msg, strlen(msg), 100);
 
 
 

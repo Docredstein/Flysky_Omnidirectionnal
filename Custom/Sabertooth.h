@@ -8,7 +8,7 @@
 #ifndef SABERTOOTH_H_
 #define SABERTOOTH_H_
 #include "main.h"
-/*
+
 typedef struct {
 	uint8_t * Packet;
 	uint16_t length;
@@ -16,19 +16,23 @@ typedef struct {
 } Packet_el;
 
 typedef struct {
+	uint8_t CurrentlySending;
 	uint16_t NumberOfPacket;
 	Packet_el *FirstPacket;
 	Packet_el *lastPacket;
 } UART_Queue;
-*/
+
 typedef struct {
 	UART_HandleTypeDef *handle;
 	uint8_t adress[4];
 	//motor : 0 or 1
 	uint8_t motor[4];
-	//UART_Queue  Queue;
+	UART_Queue  Queue;
 
 } Sabertooth;
+
+
+
 
 HAL_StatusTypeDef Sabertooth_Drive(Sabertooth *saber, float command[4]);
 
