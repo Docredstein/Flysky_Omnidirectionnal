@@ -4,6 +4,6 @@
 #include "math.h"
 
 
-HAL_StatusTypeDef Transform_Omni(uint8_t Channel[3], float output[4]);
+HAL_StatusTypeDef Transform_Omni(uint16_t Channel[3], float output[4]);
 
 #endif

@@ -139,12 +139,15 @@ int main(void)
 	//Controlling
 	  if (channel[8]<1500) {
 		  Sabertooth_Drive(&saber,Stop);
+		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
 		  //HAL_UART_Transmit(&huart2, "-", 1, 5);
 	  }
 	  else {
 		  Sabertooth_Drive(&saber,command);
+		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
 	  }
-
+	  sprintf(msg,"%f;%f;%f;%f\r\n",command[0],command[1],command[2],command[3]);
+	  HAL_UART_Transmit(&huart2, "-", 1, 5);
 
 
 	  //sprintf(msg,"%i,%f;\r\n",channel[0],command[0]);
