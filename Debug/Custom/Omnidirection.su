@@ -1,1 +1,2 @@
-../Custom/Omnidirection.c:2:19:Transform_Omni	56	static
+../Custom/Omnidirection.c:5:6:CurveInput	32	static
+../Custom/Omnidirection.c:10:19:Transform_Omni	48	static

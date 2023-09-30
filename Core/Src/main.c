@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "math.h"
 #include "stdio.h"
 #include "IBus.h"
 #include "Sabertooth.h"
@@ -53,9 +53,13 @@ DMA_HandleTypeDef hdma_usart3_tx;
 /* USER CODE BEGIN PV */
 IBus_struct Ibus;
 Sabertooth saber;
-uint8_t motor[4] = {0,0,1,1};
-uint8_t address[4] = {128,129,128,129};
+uint8_t motor[4] = {0,1,0,1};
+uint8_t address[4] = {128,129,129,128};
 float Stop[4]={0};
+float command[4]={0};
+
+
+
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -66,6 +70,10 @@ static void MX_USART2_UART_Init(void);
 static void MX_USART1_UART_Init(void);
 static void MX_USART3_UART_Init(void);
 /* USER CODE BEGIN PFP */
+
+
+
+
 
 /* USER CODE END PFP */
 
@@ -119,7 +127,7 @@ int main(void)
 
 
   /* USER CODE END 2 */
-  float command[4]= {0};
+
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
   while (1)
@@ -132,6 +140,11 @@ int main(void)
 	  IBUS_Update(&Ibus);
 
 	//Processing
+	  uint16_t swap = channel[0];
+	  channel[0] = channel[2];
+	  channel[1] = swap;
+	  channel[2] = channel[3];
+
 	  Transform_Omni(channel, command);
 
 
@@ -140,19 +153,19 @@ int main(void)
 	  if (channel[8]<1500) {
 		  Sabertooth_Drive(&saber,Stop);
 		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
-		  //HAL_UART_Transmit(&huart2, "-", 1, 5);
+		  HAL_UART_Transmit(&huart2, "-", 1, 5);
 	  }
 	  else {
 		  Sabertooth_Drive(&saber,command);
 		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
 	  }
-	  sprintf(msg,"%f;%f;%f;%f\r\n",command[0],command[1],command[2],command[3]);
-	  HAL_UART_Transmit(&huart2, "-", 1, 5);
+	  sprintf(msg,"%i;%i;%i; ==> %f;%f;%f;%f\r\n",channel[0],channel[1],channel[2],command[0],command[1],command[2],command[3]);
+	  //HAL_UART_Transmit(&huart2, "-", 1, 5);
 
 
 	  //sprintf(msg,"%i,%f;\r\n",channel[0],command[0]);
 	  //sprintf(msg,"%i;%i;%i;%i;%i;%i;%i;%i;%i;%i\r\n",channel[0],channel[1],channel[2],channel[3],channel[4],channel[5],channel[6],channel[7],channel[8],channel[9]);
-	  //HAL_UART_Transmit(&huart2, msg, strlen(msg), 100);
+	  HAL_UART_Transmit(&huart2, msg, strlen(msg), 100);
 
 
 
@@ -234,7 +247,8 @@ static void MX_USART1_UART_Init(void)
   huart1.Init.HwFlowCtl = UART_HWCONTROL_NONE;
   huart1.Init.OverSampling = UART_OVERSAMPLING_16;
   huart1.Init.OneBitSampling = UART_ONE_BIT_SAMPLE_DISABLE;
-  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_NO_INIT;
+  huart1.AdvancedInit.AdvFeatureInit = UART_ADVFEATURE_SWAP_INIT;
+  huart1.AdvancedInit.Swap = UART_ADVFEATURE_SWAP_ENABLE;
   if (HAL_UART_Init(&huart1) != HAL_OK)
   {
     Error_Handler();

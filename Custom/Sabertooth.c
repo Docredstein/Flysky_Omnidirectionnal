@@ -50,8 +50,8 @@ HAL_StatusTypeDef Sabertooth_Send(Sabertooth *saber, uint8_t address,
 	Checksum = Checksum & 0x7F;
 	Packet[2 + data_length] = Checksum;
 	//return HAL_UART_Transmit_DMA(saber->handle, Packet, 3 + data_length);
-	//return HAL_UART_Transmit(saber->handle, Packet, 3+data_length,10);
-	static Packet_el PacketToSend;
+	return HAL_UART_Transmit(saber->handle, Packet, 3+data_length,10);
+	/*static Packet_el PacketToSend;
 	PacketToSend.Next_Packet = 0;
 	PacketToSend.Packet = Packet;
 	PacketToSend.length = 3 + data_length;
@@ -67,7 +67,7 @@ HAL_StatusTypeDef Sabertooth_Send(Sabertooth *saber, uint8_t address,
 		saber->Queue.FirstPacket = &PacketToSend;
 		saber->Queue.lastPacket = &PacketToSend;
 		saber->Queue.NumberOfPacket = 1;
-	}
+	}*/
 	return HAL_OK;
 }
 
