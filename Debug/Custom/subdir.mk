@@ -7,17 +7,20 @@
 C_SRCS += \
 ../Custom/IBus.c \
 ../Custom/Omnidirection.c \
-../Custom/Sabertooth.c 
+../Custom/Sabertooth.c \
+../Custom/Stepper.c 
 
 OBJS += \
 ./Custom/IBus.o \
 ./Custom/Omnidirection.o \
-./Custom/Sabertooth.o 
+./Custom/Sabertooth.o \
+./Custom/Stepper.o 
 
 C_DEPS += \
 ./Custom/IBus.d \
 ./Custom/Omnidirection.d \
-./Custom/Sabertooth.d 
+./Custom/Sabertooth.d \
+./Custom/Stepper.d 
 
 
 # Each subdirectory must supply rules for building sources it contributes
@@ -27,7 +30,7 @@ Custom/%.o Custom/%.su Custom/%.cyclo: ../Custom/%.c Custom/subdir.mk
 clean: clean-Custom
 
 clean-Custom:
-	-$(RM) ./Custom/IBus.cyclo ./Custom/IBus.d ./Custom/IBus.o ./Custom/IBus.su ./Custom/Omnidirection.cyclo ./Custom/Omnidirection.d ./Custom/Omnidirection.o ./Custom/Omnidirection.su ./Custom/Sabertooth.cyclo ./Custom/Sabertooth.d ./Custom/Sabertooth.o ./Custom/Sabertooth.su
+	-$(RM) ./Custom/IBus.cyclo ./Custom/IBus.d ./Custom/IBus.o ./Custom/IBus.su ./Custom/Omnidirection.cyclo ./Custom/Omnidirection.d ./Custom/Omnidirection.o ./Custom/Omnidirection.su ./Custom/Sabertooth.cyclo ./Custom/Sabertooth.d ./Custom/Sabertooth.o ./Custom/Sabertooth.su ./Custom/Stepper.cyclo ./Custom/Stepper.d ./Custom/Stepper.o ./Custom/Stepper.su
 
 .PHONY: clean-Custom
 

@@ -8,6 +8,7 @@
 "./Custom/IBus.o"
 "./Custom/Omnidirection.o"
 "./Custom/Sabertooth.o"
+"./Custom/Stepper.o"
 "./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal.o"
 "./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_cortex.o"
 "./Drivers/STM32L4xx_HAL_Driver/Src/stm32l4xx_hal_dma.o"
