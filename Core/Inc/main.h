@@ -71,6 +71,9 @@ void Error_Handler(void);
 #define CLK_GPIO_Port GPIOB
 #define DIO_Pin GPIO_PIN_2
 #define DIO_GPIO_Port GPIOB
+#define Endstop_Pin GPIO_PIN_9
+#define Endstop_GPIO_Port GPIOC
+#define Endstop_EXTI_IRQn EXTI9_5_IRQn
 #define TMS_Pin GPIO_PIN_13
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin GPIO_PIN_14
