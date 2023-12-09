@@ -1,0 +1,3 @@
+../Custom/Stepper.c:10:19:Stepper_Init	1
+../Custom/Stepper.c:27:19:Stepper_SetPos	6
+../Custom/Stepper.c:66:19:Stepper_InitPos	1

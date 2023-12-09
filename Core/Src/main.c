@@ -37,7 +37,9 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-
+#define SCORE_CHANNEL 9
+#define ARM_CHANNEL 7
+#define ELEVATOR_CHANNEL 8
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -99,9 +101,29 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
   	htim2.Instance->CNT = 0;
   	stepper.Pos = 0;
   	stepper.moving = 0;
+  	stepper.init_state=2;
     }
 }
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * fired_timer) {
 
+	if (fired_timer==stepper.Timer_Gate) {
+		if (stepper.init_state==1) {
+			HAL_GPIO_WritePin(stepper.DirBank, stepper.DirPin, !stepper.UpDir);
+			stepper.Timer_Gate->Instance->CNT = 0;
+			stepper.Timer_PWM->Instance->CNT = 20000;
+			HAL_TIM_OC_Start_IT(fired_timer, TIM_CHANNEL_1);
+
+		}
+		else {
+			HAL_TIM_OC_Stop_IT(stepper.Timer_Gate, TIM_CHANNEL_1);
+			HAL_TIM_OC_Stop(stepper.Timer_PWM, TIM_CHANNEL_1);
+			stepper.Timer_Gate->Instance->CNT = 0;
+			stepper.Timer_Gate->Instance->CNT = 0;
+			stepper.Pos = stepper.TargetPos;
+			stepper.moving = 0;
+		}
+	}
+}
 
 
 /* USER CODE END 0 */
@@ -171,13 +193,23 @@ int main(void)
 	  channel[2] = channel[3];
 
 	  Transform_Omni(channel, command);
-	  int32_t Estimated_score = floor((channel[8]-1000)/50);
+	  int32_t Estimated_score = floor((channel[SCORE_CHANNEL]-1000)/50);
 
 	  tm1637_write_int(&Display, Estimated_score, 0);
-
+	  switch(channel[ELEVATOR_CHANNEL]) {
+	  case 1000 :
+		  Stepper_SetPos(&stepper, 0);
+		  break;
+	  case 1500 :
+		  Stepper_SetPos(&stepper, 1);
+		  break;
+	  case 2000 :
+		  Stepper_SetPos(&stepper, 2);
+		  break;
+	  }
 
 	//Controlling
-	  if (channel[8]<1500) {
+	  if (channel[ARM_CHANNEL]<1500) {
 		  Sabertooth_Drive(&saber,Stop);
 		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
 		  HAL_UART_Transmit(&huart2, "-", 1, 5);
@@ -186,12 +218,12 @@ int main(void)
 		  Sabertooth_Drive(&saber,command);
 		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
 	  }
-	  sprintf(msg,"%i;%i;%i; ==> %f;%f;%f;%f\r\n",channel[0],channel[1],channel[2],command[0],command[1],command[2],command[3]);
+	  //sprintf(msg,"%i;%i;%i; ==> %f;%f;%f;%f\r\n",channel[0],channel[1],channel[2],command[0],command[1],command[2],command[3]);
 	  //HAL_UART_Transmit(&huart2, "-", 1, 5);
 
 
 	  //sprintf(msg,"%i,%f;\r\n",channel[0],command[0]);
-	  //sprintf(msg,"%i;%i;%i;%i;%i;%i;%i;%i;%i;%i\r\n",channel[0],channel[1],channel[2],channel[3],channel[4],channel[5],channel[6],channel[7],channel[8],channel[9]);
+	  sprintf(msg,"%i;%i;%i;%i;%i;%i;%i;%i;%i;%i\r\n",channel[0],channel[1],channel[2],channel[3],channel[4],channel[5],channel[6],channel[7],channel[8],channel[9]);
 	  HAL_UART_Transmit(&huart2, msg, strlen(msg), 100);
 
 
