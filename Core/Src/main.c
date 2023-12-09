@@ -94,6 +94,8 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)
 {
     if(GPIO_Pin == GPIO_PIN_9) // If The INT Source Is EXTI Line9 (A9 Pin)
     {
+    HAL_TIM_Base_Stop_IT(&htim2);
+    HAL_TIM_Base_Stop(&htim1);
   	HAL_TIM_OC_Stop(&htim1, TIM_CHANNEL_1);
   	HAL_TIM_OC_Stop_IT(&htim2, TIM_CHANNEL_1);
 
@@ -115,6 +117,8 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef * fired_timer) {
 
 		}
 		else {
+			HAL_TIM_Base_Stop(&htim1);
+			HAL_TIM_Base_Stop_IT(&htim2);
 			HAL_TIM_OC_Stop_IT(stepper.Timer_Gate, TIM_CHANNEL_1);
 			HAL_TIM_OC_Stop(stepper.Timer_PWM, TIM_CHANNEL_1);
 			stepper.Timer_Gate->Instance->CNT = 0;
