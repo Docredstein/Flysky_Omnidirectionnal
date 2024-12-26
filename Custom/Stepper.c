@@ -7,7 +7,7 @@
 
 #include "Stepper.h"
 
-HAL_StatusTypeDef Stepper_Init(Stepper_t *stepper, GPIO_TypeDef DirBank,
+HAL_StatusTypeDef Stepper_Init(Stepper_t *stepper, GPIO_TypeDef * DirBank,
 		uint16_t DirPin, TIM_HandleTypeDef Timer_PWM,
 		TIM_HandleTypeDef Timer_Gate, uint8_t UpDir) {
 	stepper->DirBank = DirBank;
@@ -31,6 +31,5 @@ HAL_StatusTypeDef Stepper_InitPos(Stepper_t *stepper) {
 	TIM_HandleTypeDef gate = stepper->Timer_Gate;
 	TIM_HandleTypeDef PWM = stepper->Timer_PWM;
 	HAL_GPIO_WritePin(stepper->DirBank, stepper->DirPin, stepper->UpDir);
-
 
 }

@@ -17,6 +17,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc.h \
+ ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h \
@@ -27,11 +29,11 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
- D:/stm/Omnidirectionnnel/Custom/Stepper.h \
- D:/stm/Omnidirectionnnel/Custom/IBus.h \
- D:/stm/Omnidirectionnnel/Custom/Sabertooth.h \
- D:/stm/Omnidirectionnnel/Custom/Omnidirection.h \
- D:/stm/Omnidirectionnnel/Custom/tm1637.h
+ D:/cubeIDE/Omnidirectionnnel/Custom/Stepper.h \
+ D:/cubeIDE/Omnidirectionnnel/Custom/IBus.h \
+ D:/cubeIDE/Omnidirectionnnel/Custom/Sabertooth.h \
+ D:/cubeIDE/Omnidirectionnnel/Custom/Omnidirection.h \
+ D:/cubeIDE/Omnidirectionnnel/Custom/tm1637.h
 ../Core/Inc/main.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal.h:
 ../Core/Inc/stm32l4xx_hal_conf.h:
@@ -51,6 +53,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_gpio_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_dma.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_cortex.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc.h:
+../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_crc_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_exti.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_flash_ex.h:
@@ -61,8 +65,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_tim_ex.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart.h:
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
-D:/stm/Omnidirectionnnel/Custom/Stepper.h:
-D:/stm/Omnidirectionnnel/Custom/IBus.h:
-D:/stm/Omnidirectionnnel/Custom/Sabertooth.h:
-D:/stm/Omnidirectionnnel/Custom/Omnidirection.h:
-D:/stm/Omnidirectionnnel/Custom/tm1637.h:
+D:/cubeIDE/Omnidirectionnnel/Custom/Stepper.h:
+D:/cubeIDE/Omnidirectionnnel/Custom/IBus.h:
+D:/cubeIDE/Omnidirectionnnel/Custom/Sabertooth.h:
+D:/cubeIDE/Omnidirectionnnel/Custom/Omnidirection.h:
+D:/cubeIDE/Omnidirectionnnel/Custom/tm1637.h:

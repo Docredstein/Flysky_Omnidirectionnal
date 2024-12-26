@@ -1,0 +1,4 @@
+../Custom/Kangaroo.c:3:10:CRC14	24	static
+../Custom/Kangaroo.c:9:19:Kangaroo_Send	96	static
+../Custom/Kangaroo.c:27:19:Kangaroo_Init	48	static
+../Custom/Kangaroo.c:53:19:Kangaroo_drive	32	static

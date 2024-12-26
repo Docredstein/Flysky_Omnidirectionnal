@@ -24,13 +24,14 @@ void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	}
 }
 HAL_StatusTypeDef Sabertooth_Init(Sabertooth *saber, UART_HandleTypeDef *handle,
-		uint8_t motor[4], uint8_t adress[4]) {
+		uint8_t motor[4], uint8_t adress[4], CRC_HandleTypeDef * crc) {
 	sabertooth_ptr = saber;
 	for (int i = 0; i < 4; i++) {
 		saber->adress[i] = adress[i];
 		saber->motor[i] = motor[i];
 	}
 	saber->handle = handle;
+	saber->crc=crc;
 	/*saber->Queue.FirstPacket = 0;
 	 saber->Queue.NumberOfPacket = 0;*/
 	return HAL_OK;

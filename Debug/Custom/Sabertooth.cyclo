@@ -1,4 +1,4 @@
 ../Custom/Sabertooth.c:11:6:HAL_UART_RxCpltCallback	3
 ../Custom/Sabertooth.c:26:19:Sabertooth_Init	2
-../Custom/Sabertooth.c:38:19:Sabertooth_Send	3
-../Custom/Sabertooth.c:74:19:Sabertooth_Drive	3
+../Custom/Sabertooth.c:39:19:Sabertooth_Send	3
+../Custom/Sabertooth.c:75:19:Sabertooth_Drive	3
