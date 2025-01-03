@@ -31,7 +31,8 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
  ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h \
  D:/cubeIDE/Omnidirectionnnel/Custom/Stepper.h \
  D:/cubeIDE/Omnidirectionnnel/Custom/IBus.h \
- D:/cubeIDE/Omnidirectionnnel/Custom/Sabertooth.h \
+ D:/cubeIDE/Omnidirectionnnel/Custom/Kangaroo.h \
+ D:/cubeIDE/Omnidirectionnnel/Custom/sabertooth.h \
  D:/cubeIDE/Omnidirectionnnel/Custom/Omnidirection.h \
  D:/cubeIDE/Omnidirectionnnel/Custom/tm1637.h
 ../Core/Inc/main.h:
@@ -67,6 +68,7 @@ Core/Src/main.o: ../Core/Src/main.c ../Core/Inc/main.h \
 ../Drivers/STM32L4xx_HAL_Driver/Inc/stm32l4xx_hal_uart_ex.h:
 D:/cubeIDE/Omnidirectionnnel/Custom/Stepper.h:
 D:/cubeIDE/Omnidirectionnnel/Custom/IBus.h:
-D:/cubeIDE/Omnidirectionnnel/Custom/Sabertooth.h:
+D:/cubeIDE/Omnidirectionnnel/Custom/Kangaroo.h:
+D:/cubeIDE/Omnidirectionnnel/Custom/sabertooth.h:
 D:/cubeIDE/Omnidirectionnnel/Custom/Omnidirection.h:
 D:/cubeIDE/Omnidirectionnnel/Custom/tm1637.h:

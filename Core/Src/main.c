@@ -1,4 +1,7 @@
 /* USER CODE BEGIN Header */
+
+
+#define USE_KANGAROO
 /**
   ******************************************************************************
   * @file           : main.c
@@ -25,7 +28,13 @@
 #include "stdio.h"
 #include "Stepper.h"
 #include "IBus.h"
+
+#ifdef USE_KANGAROO
+#include "Kangaroo.h"
+#else
 #include "Sabertooth.h"
+#endif
+
 #include "Omnidirection.h"
 #include "tm1637.h"
 /* USER CODE END Includes */
@@ -59,13 +68,15 @@ DMA_HandleTypeDef hdma_usart3_tx;
 
 /* USER CODE BEGIN PV */
 IBus_struct Ibus;
-Sabertooth saber;
+
 tm1637_t Display;
 Stepper_t stepper;
 uint8_t motor[4] = {0,1,0,1};
 uint8_t address[4] = {128,129,129,128};
 float Stop[4]={0};
 float command[4]={0};
+
+Sabertooth saber;
 
 
 
@@ -148,7 +159,11 @@ int main(void)
   /* USER CODE BEGIN 2 */
   uint16_t *channel;
   IBUS_Init(&Ibus, &huart1);
-  Sabertooth_Init(&saber, &huart3, motor ,address,&hcrc);
+#ifndef USE_KANGAROO
+  Sabertooth_Init(&saber, &huart3, motor ,address);
+#else
+  Kangaroo_Init(&saber, &huart3, motor, address);
+#endif
   channel = IBUS_GetChannels(&Ibus);
 
   char msg[150] = {0};
@@ -183,12 +198,20 @@ int main(void)
 
 	//Controlling
 	  if (channel[8]<1500) {
+#ifndef USE_KANGAROO
 		  Sabertooth_Drive(&saber,Stop);
+#else
+		  Kangaroo_drive(&saber, Stop);
+#endif
 		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 0);
 		  HAL_UART_Transmit(&huart2, "-", 1, 5);
 	  }
 	  else {
+#ifndef USE_KANGAROO
 		  Sabertooth_Drive(&saber,command);
+#else
+		  Kangaroo_drive(&saber, command);
+#endif
 		  HAL_GPIO_WritePin(LD2_GPIO_Port, LD2_Pin, 1);
 	  }
 	  sprintf(msg,"%i;%i;%i; ==> %f;%f;%f;%f\r\n",channel[0],channel[1],channel[2],command[0],command[1],command[2],command[3]);

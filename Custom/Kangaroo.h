@@ -1,7 +1,7 @@
 #pragma once
 #include "main.h"
 #include "sabertooth.h"
-
+#define SPEED_CONSTANT 100
 uint16_t CRC14(uint8_t data[], uint16_t lenght);
 
 HAL_StatusTypeDef Kangaroo_drive(Sabertooth *saber, float command[4]);

@@ -1,4 +1,5 @@
-../Custom/Kangaroo.c:3:10:CRC14	1
-../Custom/Kangaroo.c:9:19:Kangaroo_Send	2
-../Custom/Kangaroo.c:27:19:Kangaroo_Init	4
-../Custom/Kangaroo.c:53:19:Kangaroo_drive	3
+../Custom/Kangaroo.c:4:8:bitpackNumber	5
+../Custom/Kangaroo.c:20:10:crc14	4
+../Custom/Kangaroo.c:36:19:Kangaroo_Send	2
+../Custom/Kangaroo.c:56:19:Kangaroo_Init	4
+../Custom/Kangaroo.c:84:19:Kangaroo_drive	3
